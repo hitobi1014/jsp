@@ -1,0 +1,11 @@
+Tomcat : Servlet container
+web.xml에 만들어놓은 서블릿을 tomcat이 new연산자를 통해 만들어줌
+
+WAS : servlet container + EJB container
+
+<데이터>
+1. 웹 브라우저 주소줄에 주소 입력 - 기본설정 : get
+2. 버튼 : form - get / post
+3. link - 기본설정 : get
+
+요청 => HTTP method : get, post
