@@ -8,12 +8,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<% // 스크립틀릿 : 자바 로직을 작성하는 공간 => 서버에서 실행
-		// 특정메소드 안에서 구현하는 자바로직
+	<% // 스크립틀릿 : 자바 로직을 작성하는 공간
 		Date date = new Date();
 	%>
 	
-	<%-- expression(표현식) : 화면에 출력을 해준다 => 정적인 html로 변환되어 화면에 보여줌
+	<%-- expression : 화면에 출력을 해준다 
 			writer.print()	
 	--%>
 	현재시간 : <%= date %>
