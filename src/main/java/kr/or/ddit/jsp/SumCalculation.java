@@ -26,7 +26,6 @@ public class SumCalculation extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		int num[] =  new int[Integer.parseInt(request.getParameter("number"))];
 		int start =  Integer.parseInt(request.getParameter("start"));
 		int end =  Integer.parseInt(request.getParameter("end"));
 		logger.debug("start : {} / end : {}" ,start,end);
