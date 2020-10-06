@@ -3,10 +3,18 @@
 
 <!DOCTYPE html>
 <script>
-	window.onload = function getCookieValue(cookieName){
-		var cookie = document.cookie.indexOf(cookieName);
-		console.log(cookie);
-	}
+// 	window.onload = function getCookieValue(cookieName){
+// 		var cookie = document.cookie.indexOf(cookieName);
+// 		String cookies[] = cookieString.split("; ");
+// 		String cookieNames[] = null;
+// 		String cookieValue = "";
+// 		for(int i=0; i<cookies.length; i++) {
+// 			cookieNames = cookies[i].split("=");
+// 			if(cookie==cookieNames[0]) {
+// 				cookieValue = cookieNames[1];
+// 			}
+// 		}
+// 	}
 </script>
 <html lang="en">
   <head>
@@ -45,6 +53,20 @@
     </div> <!-- /container -->
 	<script>
 		getCookieValue("USERID");
+		getCookieValue("REMEMBERME");
+		
+		function getCookieValue(cookieName){
+			var cookies = document.cookie.split("; ");
+			var cookieNames = null;
+			var cookieValue = "";
+			for(i=0; i<cookies.length; i++) {
+				cookieNames = cookies[i].split("=");
+				if(cookieName==cookieNames[0]) {
+					cookieValue = cookieNames[1];
+				}
+			}
+			console.log(cookieValue);
+		}
 	</script>
   </body>
 </html>
