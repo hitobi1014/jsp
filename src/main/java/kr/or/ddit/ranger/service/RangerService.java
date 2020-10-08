@@ -16,7 +16,7 @@ public class RangerService implements RangerServiceI {
 		rangers.add("sally");
 		rangers.add("moon");
 		rangers.add("james");
-		return null;
+		return rangers;
 	}
 
 }

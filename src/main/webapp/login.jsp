@@ -2,21 +2,60 @@
     pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
-<script>
-// 	window.onload = function getCookieValue(cookieName){
-// 		var cookie = document.cookie.indexOf(cookieName);
-// 		String cookies[] = cookieString.split("; ");
-// 		String cookieNames[] = null;
-// 		String cookieValue = "";
-// 		for(int i=0; i<cookies.length; i++) {
-// 			cookieNames = cookies[i].split("=");
-// 			if(cookie==cookieNames[0]) {
-// 				cookieValue = cookieNames[1];
-// 			}
-// 		}
-// 	}
-</script>
 <html lang="en">
+<script src="<%= request.getContextPath() %>/js/js.cookie-2.2.1.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(function(){
+	var rememberMe = Cookies.get("REMEMBERME");
+	var userNm = Cookies.get("USERNM");
+	if(rememberMe == 'Y'){
+		$('#inputEmail').val(userNm);
+		$('.checkbox input[type=checkbox]').prop('checked',true);
+	}
+
+	$('#btn').on('click',function(){
+		if($('.checkbox input[type=checkbox]').prop('checked')){
+			Cookies.set('REMEMBERME',"Y");
+			Cookies.set('USERNM',$('#inputEmail').val());
+		}else{
+			Cookies.remove('REMEMBERME')
+			Cookies.remove('USERNM');
+		}
+
+		// submit 하기
+		$('form').submit();
+	})
+})
+	function getCookieValue(cookieName){
+		var cookies = document.cookie.split("; ");
+		var cookieNames = null;
+		var cookieValue = "";
+		for(i=0; i<cookies.length; i++) {
+			cookieNames = cookies[i].split("=");
+			if(cookieName==cookieNames[0]) {
+				cookieValue = cookieNames[1];
+				return cookieValue;
+			}
+		}
+// 		console.log(cookieValue);
+	}
+
+	function setCookie(cookieName, cookieValue, expires){
+// 		"USERNM=brown; path=/; expires=Wed, 07 Oct 2020 00:39:19 GMT;"
+		var today = new Date();
+
+		// 현재날짜에서 (+) expires 더한 날짜만큼 구하기
+		today.setDate(today.getDate() + expires)
+		document.cookie = cookieName + "=" + cookieValue + "; path=/; expires=" + today.toGMTString();
+		console.log(document.cookie);
+	}
+
+	// 해당 쿠키의 expires속성을 과거 날짜로 변경
+	function deleteCookie(cookieName){
+		setCookie(cookieName,"", -1);
+	}
+</script>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -37,36 +76,20 @@
   <body>
   	
     <div class="container">
-      <form class="form-signin">
+      <form class="form-signin" action="<%=request.getContextPath()%>/login" method="post">
         <h2 class="form-signin-heading">Please sign in</h2>
         <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <input type="email" id="inputEmail" name="userId" class="form-control" placeholder="Email address" required autofocus value="brown">
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required value="passBrown">
         <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> Remember me
           </label>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" type="button" id="btn">Sign in</button>
       </form>
     </div> <!-- /container -->
-	<script>
-		getCookieValue("USERID");
-		getCookieValue("REMEMBERME");
-		
-		function getCookieValue(cookieName){
-			var cookies = document.cookie.split("; ");
-			var cookieNames = null;
-			var cookieValue = "";
-			for(i=0; i<cookies.length; i++) {
-				cookieNames = cookies[i].split("=");
-				if(cookieName==cookieNames[0]) {
-					cookieValue = cookieNames[1];
-				}
-			}
-			console.log(cookieValue);
-		}
-	</script>
+
   </body>
 </html>
