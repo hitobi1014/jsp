@@ -26,14 +26,15 @@
 		<div class="navbar-header">
 			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
 				aria-controls="navbar">
-				<span class="sr-only">Toggle navigation</span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
+				<span class="sr-only">Toggle navigation</span> 
+				<span class="icon-bar"></span> 
+				<span class="icon-bar"></span> 
+				<span class="icon-bar"></span>
 			</button>
 			<%
 				MemberVO mvo = (MemberVO)session.getAttribute("S_MEMBER");
 			%>
-			<a class="navbar-brand" href="#">JSP/SPRING [<%=mvo == null ? "" : mvo.getUserId()%>]</a>
+			<a class="navbar-brand" href="#">JSP/SPRING []</a>
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
@@ -54,6 +55,7 @@
 			<ul class="nav nav-sidebar">
 				<li class="active"><a href="#">Main <span class="sr-only">(current)</span></a></li>
 				<li class="active"><a href="#">사용자</a></li>
+				<li class="active"><a href="<%=request.getContextPath() %>/getAllJobs">jobs</a></li>
 			</ul>
 		</div>
 		
