@@ -8,7 +8,6 @@ import kr.or.ddit.db.MybatisUtil;
 import kr.or.ddit.member.model.MemberVO;
 
 public class MemberDao implements MemberDaoI {
-	private SqlSession sqlSession =  MybatisUtil.getSqlSession();
 	
 	@Override
 	public MemberVO getMember(String userId) {
@@ -22,14 +21,19 @@ public class MemberDao implements MemberDaoI {
 		//select (조회시) 
 		//한 건 : selectOne
 		//여러 건 : selectList
+		SqlSession sqlSession =  MybatisUtil.getSqlSession();
 		MemberVO memberVo =  sqlSession.selectOne("member.getMember", userId);
-		
+		sqlSession.close();
 		return memberVo;
 	}
 
 	@Override
 	public List<MemberVO> getAllMember() {
+		SqlSession sqlSession =  MybatisUtil.getSqlSession();
 		List<MemberVO> memList = sqlSession.selectList("member.getAllMember");
+		//insert, update, delete 데이터 정보가 변경되는 부분이 있으면 commit이나 rollback 작업으로 트랜잭션 확정처리를 해야한다
+		sqlSession.commit(); 
+		sqlSession.close();
 		return memList;
 	}
 
