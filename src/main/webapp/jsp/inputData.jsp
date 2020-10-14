@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="<%=request.getContextPath() %>/sumCalculation" method="post">
+<form action="${pageContext.request.contextPath }/sumCalculation" method="post">
 	<label for="start">
 		<input id="start" type="text" name="start" placeholder="숫자입력">
 	</label><br>

@@ -49,7 +49,7 @@ $(function(){
 	<input type="radio" name="method" value="GET">GET <br>
 	<input type="radio" name="method" value="POST">POST <br>
 	
-	<form id="fm" action="<%=request.getContextPath() %>/request/getRequestResponse.jsp" method="">
+	<form id="fm" action="${pageContext.request.contextPath }/request/getRequestResponse.jsp" method="">
 		user id : <input type="text" name="userId" value="어피치"><br>
 		user id : <input type="text" name="userId" value="라이언"><br>
 		password : <input type="password" name="password" value="a1234"><br>

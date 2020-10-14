@@ -1,7 +1,8 @@
-<%@page import="kr.or.ddit.jobs.model.JobsVo"%>
+<%@page import="kr.or.ddit.member.model.MemberVO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,23 +29,7 @@
 				<div class="col-sm-8 blog-main">
 					<h2 class="sub-header">사용자</h2>
 					<div class="table-responsive">
-						<%List<JobsVo> jobsList = (List<JobsVo>) request.getAttribute("jobsList");%>
-						<table class="table table-striped">
-							<tr>
-								<th>job_id</th>
-								<th>job_title</th>
-							</tr>
-							<%
-								for(int i=0; i<jobsList.size(); i++){
-							%>
-							<tr>
-								<td><%=jobsList.get(i).getJob_id() %></td>
-								<td><%=jobsList.get(i).getJob_title() %></td>
-							</tr>
-							<%		
-								}
-							%>
-						</table>
+						<%@ include file="/layout/memberListContent.jsp" %>
 					</div>
 					<a class="btn btn-default pull-right">사용자 등록</a>
 					
