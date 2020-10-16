@@ -13,10 +13,12 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="icon" href="../../favicon.ico">
+<script>
+window.onload = function()
+</script>
 <title>Jsp</title>
 <%@ include file="/layout/commonLib.jsp" %>
 </head>
-
 <body>
 <%@ include file="/layout/header.jsp" %>
 <div class="container-fluid">
@@ -29,17 +31,37 @@
 				<div class="col-sm-8 blog-main">
 					<h2 class="sub-header">사용자</h2>
 					<div class="table-responsive">
-						<%@ include file="/layout/memberListContent.jsp" %>
+						<table class="table table-striped">
+							<tr>
+								<th>사용자 아이디</th>
+								<th>사용자 이름</th>
+								<th>사용자 별명</th>
+								<th>등록일시</th>
+							</tr>
+							<c:forEach items="${memberList}" var="member">
+								<tr>
+									<td>${member.userid }</td>
+									<td>${member.usernm }</td>
+									<td>${member.alias }</td>
+									<td>${member.reg_dt }</td>
+								</tr>
+							</c:forEach>
+						</table>
 					</div>
 					<a class="btn btn-default pull-right">사용자 등록</a>
-					
+					page : ${page }
 					<div class="text-center">
 						<ul class="pagination">
-							<li><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">5</a></li>
+							<c:forEach var="i" begin="1" end="${pages }">
+								<c:choose>
+									<c:when test="${i == page }">
+										<li class="active"><span>${i }</span></li>
+									</c:when>
+									<c:otherwise>
+										<li><a href="${pageContext.request.contextPath }/memberList?page=${i }">${i }</a></li>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
 						</ul>
 					</div>
 				</div>
