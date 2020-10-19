@@ -21,7 +21,7 @@
 	request 객체 memberList라는 이름으로 저장 <br>
 	<%
 		MemberServiceI memberService = new MemberService();
-		request.setAttribute("memberList", memberService.getAllMember());
+		request.setAttribute("memberList", memberService.selectAllMember());
 	%>
 	<table border="1">
 		<tr>
