@@ -53,7 +53,11 @@ public class RequestCounterFilter implements Filter{
 //		logger.debug("요청횟수 : {}",requestCounterMap.get(req.getRequestURI()));
 		//등록된 다른 필터로 요청을 위임
 		//만약 더 이상 등록된 필터가 없을경우 요청을 처리할 서블릿 / jsp으로 요청을 전달
+		// 전처리 : 요청이 서블릿 실행되기전
+		logger.debug("RequestCounterFilter 전처리 부분-chain.doFilter 호출전");
 		chain.doFilter(request, response);
+		// 후처리 : 요청이 서블릿 실행된후
+		logger.debug("RequestCounterFilter 전처리 부분-chain.doFilter 호출후");
 	}
 
 	@Override
