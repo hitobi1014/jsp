@@ -14,11 +14,19 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="icon" href="../../favicon.ico">
-<script>
-window.onload = function()
-</script>
 <title>Jsp</title>
 <%@ include file="/layout/commonLib.jsp" %>
+<script>
+$(document).ready(function(){
+	$("#memberList tr").on("click",function(){
+		// data-userid < 데이터 속성 이름
+		var userid = $(this).data("userid");
+		console.log("userid : " + userid);
+		
+		document.location = "/member?userid=" + userid;
+	});
+})
+</script>
 </head>
 <body>
 <%@ include file="/layout/header.jsp" %>
@@ -39,16 +47,17 @@ window.onload = function()
 								<th>사용자 별명</th>
 								<th>등록일시</th>
 							</tr>
-							<c:forEach items="${memberList}" var="member">
-								<tr>
-									<td>${member.userid }</td>
-									<td>${member.usernm }</td>
-									<td>${member.alias }</td>
-									
-									<!-- format : yyyy-MM-dd -->
-									<td><fmt:formatDate value="${member.reg_dt }" pattern="yyyy-MM-dd"/></td>
-								</tr>
-							</c:forEach>
+							<tbody id="memberList">
+								<c:forEach items="${memberList}" var="member">
+									<tr data-userid="${member.userid }">
+										<td>${member.userid }</td>
+										<td>${member.usernm }</td>
+										<td>${member.alias }</td>
+										<!-- format : yyyy-MM-dd -->
+										<td><fmt:formatDate value="${member.reg_dt }" pattern="yyyy-MM-dd"/></td>
+									</tr>
+								</c:forEach>
+							</tbody>
 						</table>
 					</div>
 					<a class="btn btn-default pull-right">사용자 등록</a>
