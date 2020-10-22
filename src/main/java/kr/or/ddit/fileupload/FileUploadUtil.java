@@ -17,4 +17,13 @@ public class FileUploadUtil {
 		}
 		return fileName;
 	}
+	
+	// filename : sally.png ==> png
+	public static String getExtension(String filename) {
+		if(filename == null || filename.indexOf(".")== -1)
+			return "";
+		else {
+			return filename.split("\\.")[1];
+		}
+	}
 }

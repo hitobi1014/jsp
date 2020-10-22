@@ -9,6 +9,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -20,12 +21,19 @@ import kr.or.ddit.member.model.MemberVO;
 
 public class MemberServiceTest {
 	private static final Logger logger = LoggerFactory.getLogger(MemberServiceTest.class);
+	MemberServiceI memberService;
+	
+	@Before
+	public void setup() {
+		memberService = new MemberService(); 
+		String userid = "cmj";
+		memberService.deleteMember(userid);
+	}
+	
 	@Test
 	public void getMembertest() {
 		/***Given***/
-		MemberServiceI memberService = new MemberService(); 
 		String userId = "brown";
-		
 		MemberVO answerMemberVo = new MemberVO();
 		answerMemberVo.setUserid("brown");
 		answerMemberVo.setPass("brownPass");
@@ -41,7 +49,6 @@ public class MemberServiceTest {
 	@Test
 	public void selectMemberPageListTest() {
 		/***Given***/
-		MemberServiceI memberService = new MemberService();
 		PageVO pageVo = new PageVO(1,7);
 		/***When***/
 		Map<String, Object> map =  memberService.selectAllMemberPage(pageVo);
@@ -58,6 +65,16 @@ public class MemberServiceTest {
 		for(Locale locale : locales) {
 			logger.debug(locale.toString());
 		}
+	}
+	
+	@Test
+	public void insertMemberTest() {
+		/***Given***/
+		MemberVO memberVo = new MemberVO("cmj","1234","최민준","dal","대전 중구 중앙로","영민빌딩","34960","D:\\profile\\cony.png","cony.png");
+		/***When***/
+		int insertCnt = memberService.insertMember(memberVo);
+		/***Then***/
+		assertEquals(1, insertCnt);
 	}
 	
 }

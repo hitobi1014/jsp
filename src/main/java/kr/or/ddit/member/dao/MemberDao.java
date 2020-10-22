@@ -1,5 +1,6 @@
 package kr.or.ddit.member.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -40,8 +41,56 @@ public class MemberDao implements MemberDaoI{
 	public int selectMemberTotalCount(SqlSession sqlSession) {
 		return sqlSession.selectOne("member.selectMemberTotalCount");
 	}
-	
-	
 
+	@Override
+	public int insertMember(MemberVO memberVo) {
+		SqlSession sqlSession = MybatisUtil.getSqlSession();
+		int insertCnt = 0;
+		try {
+			insertCnt = sqlSession.insert("member.insertMember",memberVo);
+		} catch (Exception e) {
+			
+		}
+		// 트랜잭션을 명시적으로 끝내줘야함
+		if(insertCnt ==1 ) {
+			sqlSession.commit();
+		}
+		else {
+			sqlSession.rollback();
+		}
+		sqlSession.close();
+		
+		return insertCnt;
+	}
+
+	@Override
+	public int deleteMember(String userid) {
+		SqlSession sqlSession = MybatisUtil.getSqlSession();
+		int deleteCnt = sqlSession.delete("member.deleteMember",userid);
+		
+		if(deleteCnt ==1) {
+			sqlSession.commit();
+		}
+		else {
+			sqlSession.rollback();
+		}
+		sqlSession.close();
+		return deleteCnt;
+	}
+
+	@Override
+	public int updateMember(MemberVO memberVo) {
+		SqlSession sqlSession = MybatisUtil.getSqlSession();
+		int updateCnt = sqlSession.update("member.updateMember",memberVo);
+		
+		if(updateCnt ==1) {
+			sqlSession.commit();
+		}
+		else {
+			sqlSession.rollback();
+		}
+		sqlSession.close();
+		return updateCnt;
+	}
 	
 }

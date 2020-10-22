@@ -9,7 +9,16 @@ import kr.or.ddit.member.model.MemberVO;
 
 public interface MemberDaoI {
 	MemberVO getMember(String userId);
+	
 	List<MemberVO> selectAllMember();
+	
 	List<MemberVO> selectAllMemberPage(SqlSession sqlSession, PageVO pageVo);
+	
 	int selectMemberTotalCount(SqlSession sqlSession);
+	
+	int insertMember(MemberVO memberVo);
+	
+	int deleteMember(String userid);
+	
+	int updateMember(MemberVO memberVo);
 }
