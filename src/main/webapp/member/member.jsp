@@ -100,7 +100,7 @@
 
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-default">사용자 등록</button>
+						<button type="submit" class="btn btn-default">사용자 수정</button>
 					</div>
 				</div>
 			</form>
