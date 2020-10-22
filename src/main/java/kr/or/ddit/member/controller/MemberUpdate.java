@@ -78,8 +78,6 @@ public class MemberUpdate extends HttpServlet {
 		if (filePath == null || filePath.equals("")) {
 			realFilename = request.getParameter("realfilename2");
 			filePath = request.getParameter("filename");
-//			logger.debug("제발 되ㅣ어랗: {}",filePath );
-//			logger.debug("이건 파일명 : {}",request.getParameter("filename"));
 		}
 		// 사용자 정보 등록
 		MemberVO memberVo = new MemberVO( userid, pass, usernm, alias, addr1, addr2, zipcode,filePath, realFilename);
