@@ -47,10 +47,12 @@ public class FileUploadServlet extends HttpServlet {
 		logger.debug("userid : {}",userid);
 		logger.debug("img : {}",img);
 		Part imgPart = request.getPart("img");
+		
 		logger.debug("getName() : {}",imgPart.getName());
 		logger.debug("getSize() : {}",imgPart.getSize());
 		logger.debug("getContentType : {}",imgPart.getContentType());
 		logger.debug("getHeader() : {}",imgPart.getHeader("Content-Disposition")); // form-data; name="img"; filename="contentType.jpg"
+		
 		String fileName = FileUploadUtil.getFileName(imgPart.getHeader("Content-Disposition"));
 		logger.debug("테스트 {} ",fileName);
 		imgPart.write("d:\\upload\\" + fileName);

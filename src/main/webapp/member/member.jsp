@@ -35,7 +35,10 @@
 				<div class="form-group">
 					<label for="userNm" class="col-sm-2 control-label">사용자 사진</label>
 					<div class="col-sm-10">
-						<img src="${cp}/profile/${memberVo.filename}">
+						<!-- webapp폴더안에 파일이 있을경우 -->
+<%-- 						<img src="${cp}/profile/${memberVo.filename}"> --%>
+						<!-- 사용자 아이디로 조회할때..이미지 -->
+						<img src="${cp}/profileImg?userid=${memberVo.userid}">
 					</div>
 				</div>
 				
