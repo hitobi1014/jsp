@@ -12,15 +12,15 @@
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 <meta name="description" content="">
 <meta name="author" content="">
-<script>
-// $(document).ready(function(){
-// 	$("#btn").on('click',function(){
-// 		$("#frm").submit();
-// 	});
-// });
-</script>
 <title>Jsp</title>
 <%@ include file="/layout/commonLib.jsp"%>
+<script>
+$(document).ready(function(){
+	$("#profileDownBtn").on('click',function(){
+		document.location = "/profileDownload?userid=${memberVo.userid}";
+	});
+});
+</script>
 </head>
 <body>
 	<%@ include file="/layout/header.jsp"%>
@@ -37,7 +37,8 @@
 						<!-- webapp폴더안에 파일이 있을경우 -->
 <%-- 						<img src="${cp}/profile/${memberVo.filename}"> --%>
 						<!-- 사용자 아이디로 조회할때..이미지 -->
-						<img src="${cp}/profileImg?userid=${memberVo.userid}">
+						<img src="${cp}/profileImg?userid=${memberVo.userid}"><br>
+						<button id="profileDownBtn" type="button" class="btn btn-default">다운로드 : ${memberVo.realfilename}</button>
 					</div>
 				</div>
 				
