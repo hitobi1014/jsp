@@ -27,12 +27,26 @@
   		<param-name>contextConfigLocation</param-name>
   		<param-value>classpath:kr/or/ddit/config/spring/application-context.xml</param-value>
   	</init-param>
-  	<load-on-startup>1</load-on-startup>
+  	<load-on-startup>1</load-on-startup><!-- 서버가 시작되면서 서블릿초기화될때 순서 -->
   </servlet>
   
   <servlet-mapping>
   	<servlet-name>dispatcherServlet</servlet-name>
-  	<url-pattern>*.do</url-pattern>
+  	<url-pattern>/</url-pattern>
   </servlet-mapping>
   
-</web-app>
+  <!-- 캐릭터 인코딩 설정- 스프링 프레임워크 filter -->
+  <filter>
+  	<filter-name>encodingFilter</filter-name>
+  	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>	
+  	<init-param>
+  		<param-name>encoding</param-name>
+  		<param-value>utf-8</param-value>
+  	</init-param>
+  </filter>
+  <filter-mapping>
+  	<filter-name>encodingFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+ </web-app>
