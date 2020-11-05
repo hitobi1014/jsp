@@ -2,6 +2,8 @@ package kr.or.ddit.member.model;
 
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class MemberVo {
 	private String userid;
 	private String pass;
@@ -13,23 +15,35 @@ public class MemberVo {
 	private String zipcode;
 	private String filename;
 	private String realfilename;
+	private MultipartFile file;
 	
 	public MemberVo() {
 	}
 	
-	public MemberVo(String userid, String pass, String usernm, String alias, String addr1, String addr2, String zipcode,
-			String filename, String realfilename) {
+	public MemberVo(String userid, String pass, String usernm, String alias, Date reg_dt, String addr1, String addr2,
+			String zipcode, String filename, String realfilename, MultipartFile file) {
+		super();
 		this.userid = userid;
 		this.pass = pass;
 		this.usernm = usernm;
 		this.alias = alias;
+		this.reg_dt = reg_dt;
 		this.addr1 = addr1;
 		this.addr2 = addr2;
 		this.zipcode = zipcode;
 		this.filename = filename;
 		this.realfilename = realfilename;
+		this.file = file;
 	}
-	
+
+	public MultipartFile getFile() {
+		return file;
+	}
+
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
+
 	public String getFilename() {
 		return filename;
 	}
@@ -90,6 +104,14 @@ public class MemberVo {
 	public void setReg_dt(Date reg_dt) {
 		this.reg_dt = reg_dt;
 	}
+
+	@Override
+	public String toString() {
+		return "MemberVo [userid=" + userid + ", pass=" + pass + ", usernm=" + usernm + ", alias=" + alias + ", reg_dt="
+				+ reg_dt + ", addr1=" + addr1 + ", addr2=" + addr2 + ", zipcode=" + zipcode + ", filename=" + filename
+				+ ", realfilename=" + realfilename + ", file=" + file + "]";
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -97,6 +119,7 @@ public class MemberVo {
 		result = prime * result + ((addr1 == null) ? 0 : addr1.hashCode());
 		result = prime * result + ((addr2 == null) ? 0 : addr2.hashCode());
 		result = prime * result + ((alias == null) ? 0 : alias.hashCode());
+		result = prime * result + ((file == null) ? 0 : file.hashCode());
 		result = prime * result + ((filename == null) ? 0 : filename.hashCode());
 		result = prime * result + ((pass == null) ? 0 : pass.hashCode());
 		result = prime * result + ((realfilename == null) ? 0 : realfilename.hashCode());
@@ -106,6 +129,7 @@ public class MemberVo {
 		result = prime * result + ((zipcode == null) ? 0 : zipcode.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -129,6 +153,11 @@ public class MemberVo {
 			if (other.alias != null)
 				return false;
 		} else if (!alias.equals(other.alias))
+			return false;
+		if (file == null) {
+			if (other.file != null)
+				return false;
+		} else if (!file.equals(other.file))
 			return false;
 		if (filename == null) {
 			if (other.filename != null)
@@ -167,10 +196,5 @@ public class MemberVo {
 			return false;
 		return true;
 	}
-	@Override
-	public String toString() {
-		return "MemberVO [userid=" + userid + ", pass=" + pass + ", usernm=" + usernm + ", alias=" + alias + ", reg_dt="
-				+ reg_dt + ", addr1=" + addr1 + ", addr2=" + addr2 + ", zipcode=" + zipcode + ", filename=" + filename
-				+ ", realfilename=" + realfilename + "]";
-	}
+	
 }

@@ -4,7 +4,48 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
 	<select id="getMember" resultType="memberVo">
-		select * from users where userid=#{userid}
+		select * from users where
+		userid=#{userid}
 	</select>
 
+	<select id="selectAllMember" resultType="MemberVo">
+		SELECT * FROM users
+	</select>
+
+	<select id="selectAllMemberPage" resultType="MemberVo"
+		parameterType="PageVo">
+		SELECT * FROM(
+		SELECT ROWNUM AS rn , a.*
+		FROM (
+		SELECT *
+		FROM users
+		ORDER BY reg_dt desc ,userid) a)
+		WHERE rn BETWEEN (#{page} - 1) * #{pageSize} + 1 AND #{page} * #{pageSize}
+	</select>
+
+	<select id="selectMemberTotalCount" resultType="int">
+		SELECT COUNT(*) FROM users
+	</select>
+
+	<insert id="insertMember" parameterType="MemberVo">
+		INSERT INTO users
+		VALUES(#{userid,jdbcType=VARCHAR}, #{usernm,jdbcType=VARCHAR}, #{pass,jdbcType=VARCHAR}, sysdate, #{alias,jdbcType=VARCHAR},
+		#{addr1,jdbcType=VARCHAR}, #{addr2,jdbcType=VARCHAR}, #{zipcode,jdbcType=VARCHAR}, #{filename,jdbcType=VARCHAR}, #{realfilename,jdbcType=VARCHAR})
+	</insert>
+
+	<delete id="deleteMember" parameterType="String">
+		DELETE FROM users WHERE USERID = #{userid}
+	</delete>
+
+	<update id="updateMember" parameterType="MemberVo">
+		UPDATE users SET usernm = #{usernm,jdbcType=VARCHAR}
+						, pass=#{pass,jdbcType=VARCHAR}
+						, alias=#{alias,jdbcType=VARCHAR}
+						, addr1=#{addr1,jdbcType=VARCHAR}
+						, addr2=#{addr2,jdbcType=VARCHAR}
+						, zipcode=#{zipcode,jdbcType=VARCHAR}
+						, filename=#{filename,jdbcType=VARCHAR}
+						, realfilename=#{realfilename,jdbcType=VARCHAR}
+		WHERE userid = #{userid}
+	</update>
 </mapper>
