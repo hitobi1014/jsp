@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <script src="<%= request.getContextPath() %>/js/js.cookie-2.2.1.min.js"></script>
@@ -74,7 +74,11 @@ $(function(){
   </head>
 
   <body>
-  	
+  	msg : ${msg} <br>
+  	msg_s : ${msg_s}<br>
+  	msg_ra : ${msg_ra }<br>
+  	msg_ra_attr : ${msg_ra_attr}<br>
+  	<c:remove var="msg_s" scope="session"/>
     <div class="container">
       <form class="form-signin" action="<%=request.getContextPath() %>/login/process" method="post">
         <h2 class="form-signin-heading">Please sign in</h2>
