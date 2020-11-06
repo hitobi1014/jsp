@@ -1,4 +1,4 @@
-package kr.or.ddit.member.controller;
+package kr.or.ddit.member.web;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -118,34 +118,34 @@ public class MemberController {
 		return "redirect:/member/select?userid="+userid;
 	}
 	
-	@RequestMapping(path="profileImg")
-	public void profileImg(String userid, HttpServletResponse response) throws IOException {
-		response.setContentType("image/png");
-		MemberVo memberVo = memberService.getMember(userid);
-		FileInputStream fis = new FileInputStream(memberVo.getFilename());
-		ServletOutputStream sos = response.getOutputStream();
-		byte[] buffer = new byte[512];
-		while(fis.read(buffer)!= -1) {
-			sos.write(buffer);
-		}
-		fis.close();
-		sos.flush();
-		sos.close();
-	}
+//	@RequestMapping(path="profileImg")
+//	public void profileImg(String userid, HttpServletResponse response) throws IOException {
+//		response.setContentType("image/png");
+//		MemberVo memberVo = memberService.getMember(userid);
+//		FileInputStream fis = new FileInputStream(memberVo.getFilename());
+//		ServletOutputStream sos = response.getOutputStream();
+//		byte[] buffer = new byte[512];
+//		while(fis.read(buffer)!= -1) {
+//			sos.write(buffer);
+//		}
+//		fis.close();
+//		sos.flush();
+//		sos.close();
+//	}
 	
-	@RequestMapping(path="filedown")
-	public void fileDown(String userid, HttpServletResponse response) throws IOException {
-		MemberVo memberVo = memberService.getMember(userid);
-		FileInputStream fis = new FileInputStream(memberVo.getFilename());
-		response.setHeader("Content-Disposition", "attachment; filename=\""+memberVo.getRealfilename()+"\"");
-		response.setContentType("application/octet-stream");
-		ServletOutputStream sos = response.getOutputStream();
-		byte[] buffer = new byte[512];
-		while(fis.read(buffer)!=-1) {
-			sos.write(buffer);
-		}
-		fis.close();
-		sos.flush();
-		sos.close();
-	}
+//	@RequestMapping(path="filedown")
+//	public void fileDown(String userid, HttpServletResponse response) throws IOException {
+//		MemberVo memberVo = memberService.getMember(userid);
+//		FileInputStream fis = new FileInputStream(memberVo.getFilename());
+//		response.setHeader("Content-Disposition", "attachment; filename=\""+memberVo.getRealfilename()+"\"");
+//		response.setContentType("application/octet-stream");
+//		ServletOutputStream sos = response.getOutputStream();
+//		byte[] buffer = new byte[512];
+//		while(fis.read(buffer)!=-1) {
+//			sos.write(buffer);
+//		}
+//		fis.close();
+//		sos.flush();
+//		sos.close();
+//	}
 }

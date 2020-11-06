@@ -17,7 +17,7 @@
 <script>
 $(document).ready(function(){
 	$("#profileDownBtn").on('click',function(){
-		document.location = "/member/filedown?userid=${memberVo.userid}";
+		document.location = "/filedownView?userid=${memberVo.userid}";
 	});
 });
 </script>
@@ -37,7 +37,7 @@ $(document).ready(function(){
 						<!-- webapp폴더안에 파일이 있을경우 -->
 <%-- 						<img src="${cp}/profile/${memberVo.filename}"> --%>
 						<!-- 사용자 아이디로 조회할때..이미지 -->
-						<img src="${cp}/member/profileImg?userid=${memberVo.userid}"><br>
+						<img src="${cp}/profileImgView?userid=${memberVo.userid}"><br>
 						<button id="profileDownBtn" type="button" class="btn btn-default">다운로드 : ${memberVo.realfilename}</button>
 					</div>
 				</div>
