@@ -11,9 +11,20 @@ public class ExceptionAdvice {
 	
 	@ExceptionHandler({ArithmeticException.class})
 	public String handler() {
-		
-		logger.debug("ExceptionController.handler()");
-		//에러를 처리할 화면
-		return "exception/arithmetic";
+//		
+//		logger.debug("ExceptionController.handler()");
+////		//에러를 처리할 화면
+//		return "error/arithmeticException";
+		return "";
 	}
+	
+//	@ExceptionHandler({RuntimeException.class})
+//	public String runtimeException() {
+//		return "error/runtimeException";
+//	}
+//	
+//	@ExceptionHandler({})
+//	public String throwException() {
+//		return "error/runtimeException";
+//	}
 }
