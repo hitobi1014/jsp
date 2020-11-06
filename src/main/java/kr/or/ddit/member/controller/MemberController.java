@@ -2,7 +2,6 @@ package kr.or.ddit.member.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -17,7 +16,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.or.ddit.member.model.MemberVo;
@@ -107,8 +105,23 @@ public class MemberController {
 		return "redirect:/member/select?userid="+userid;
 	}
 	
+	@RequestMapping(path="profileImg")
+	public void profileImg(String userid, HttpServletResponse response) throws IOException {
+		response.setContentType("image/png");
+		MemberVo memberVo = memberService.getMember(userid);
+		FileInputStream fis = new FileInputStream(memberVo.getFilename());
+		ServletOutputStream sos = response.getOutputStream();
+		byte[] buffer = new byte[512];
+		while(fis.read(buffer)!= -1) {
+			sos.write(buffer);
+		}
+		fis.close();
+		sos.flush();
+		sos.close();
+	}
+	
 	@RequestMapping(path="filedown")
-	public String fileDown(String userid, HttpServletResponse response) throws IOException {
+	public void fileDown(String userid, HttpServletResponse response) throws IOException {
 		MemberVo memberVo = memberService.getMember(userid);
 		FileInputStream fis = new FileInputStream(memberVo.getFilename());
 		response.setHeader("Content-Disposition", "attachment; filename=\""+memberVo.getRealfilename()+"\"");
@@ -121,6 +134,5 @@ public class MemberController {
 		fis.close();
 		sos.flush();
 		sos.close();
-		return "";
 	}
 }

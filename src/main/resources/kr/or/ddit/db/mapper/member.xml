@@ -29,8 +29,8 @@
 
 	<insert id="insertMember" parameterType="MemberVo">
 		INSERT INTO users
-		VALUES(#{userid,jdbcType=VARCHAR}, #{usernm,jdbcType=VARCHAR}, #{pass,jdbcType=VARCHAR}, sysdate, #{alias,jdbcType=VARCHAR},
-		#{addr1,jdbcType=VARCHAR}, #{addr2,jdbcType=VARCHAR}, #{zipcode,jdbcType=VARCHAR}, #{filename,jdbcType=VARCHAR}, #{realfilename,jdbcType=VARCHAR})
+		VALUES(#{userid}, #{usernm}, #{pass}, sysdate, #{alias},
+		#{addr1}, #{addr2}, #{zipcode}, #{filename,jdbcType=VARCHAR}, #{realfilename,jdbcType=VARCHAR})
 	</insert>
 
 	<delete id="deleteMember" parameterType="String">
@@ -38,12 +38,12 @@
 	</delete>
 
 	<update id="updateMember" parameterType="MemberVo">
-		UPDATE users SET usernm = #{usernm,jdbcType=VARCHAR}
-						, pass=#{pass,jdbcType=VARCHAR}
-						, alias=#{alias,jdbcType=VARCHAR}
-						, addr1=#{addr1,jdbcType=VARCHAR}
-						, addr2=#{addr2,jdbcType=VARCHAR}
-						, zipcode=#{zipcode,jdbcType=VARCHAR}
+		UPDATE users SET usernm = #{usernm}
+						, pass=#{pass}
+						, alias=#{alias}
+						, addr1=#{addr1}
+						, addr2=#{addr2}
+						, zipcode=#{zipcode}
 						, filename=#{filename,jdbcType=VARCHAR}
 						, realfilename=#{realfilename,jdbcType=VARCHAR}
 		WHERE userid = #{userid}
