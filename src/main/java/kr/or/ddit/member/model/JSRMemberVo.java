@@ -5,12 +5,14 @@ import java.util.Date;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
-public class MemberVo {
+public class JSRMemberVo {
 	private String userid;
 	private String pass;
 	
+	//null이면 안되고 , empty체크
 	@NotEmpty
 	private String usernm;
+	
 	private String alias;
 	private Date reg_dt;
 	private String addr1;
@@ -20,10 +22,10 @@ public class MemberVo {
 	private String realfilename;
 	private MultipartFile file;
 	
-	public MemberVo() {
+	public JSRMemberVo() {
 	}
 	
-	public MemberVo(String userid, String pass, String usernm, String alias, Date reg_dt, String addr1, String addr2,
+	public JSRMemberVo(String userid, String pass, String usernm, String alias, Date reg_dt, String addr1, String addr2,
 			String zipcode, String filename, String realfilename, MultipartFile file) {
 		super();
 		this.userid = userid;
@@ -141,7 +143,7 @@ public class MemberVo {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		MemberVo other = (MemberVo) obj;
+		JSRMemberVo other = (JSRMemberVo) obj;
 		if (addr1 == null) {
 			if (other.addr1 != null)
 				return false;

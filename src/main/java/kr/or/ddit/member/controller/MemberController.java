@@ -10,15 +10,19 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import kr.or.ddit.member.model.JSRMemberVo;
 import kr.or.ddit.member.model.MemberVo;
+import kr.or.ddit.member.model.MemberVoValidator;
 import kr.or.ddit.member.model.PageVo;
 import kr.or.ddit.member.service.MemberServiceI;
 
@@ -53,8 +57,17 @@ public class MemberController {
 	}
 	
 	@RequestMapping(path="regist")
-	public String regist(MemberVo memberVo) {
-		// 파일업로드
+	public String regist(@Valid MemberVo memberVo, BindingResult br) {
+//	public String regist(@Valid JSRMemberVo memberVo, BindingResult br) {
+		
+//		new MemberVoValidator().validate(memberVo, br);
+		
+		//검증을 통과하지 못했으므로 사용자 등록화면으로 이동
+		if(br.hasErrors()) {
+			return "member/memberRegist";
+		}
+		
+//		 파일업로드
 		if(memberVo.getFile() != null) {
 			String filePath = "d:\\upload\\"+memberVo.getFile().getOriginalFilename();
 			File uploadFile = new File(filePath);
