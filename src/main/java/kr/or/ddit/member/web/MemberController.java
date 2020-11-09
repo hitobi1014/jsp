@@ -48,12 +48,12 @@ public class MemberController {
 		model.addAttribute("memberList", map.get("memberList"));
 		model.addAttribute("pages", map.get("pages"));
 		
-		return "/member/memberList";
+		return "tiles/member/memberListContent";
 	}
 	
 	@RequestMapping(path="registView")
 	public String registView(){
-		return "/member/memberRegist";
+		return "tiles/member/memberRegistContent";
 	}
 	
 	@RequestMapping(path="regist")
@@ -64,7 +64,7 @@ public class MemberController {
 		
 		//검증을 통과하지 못했으므로 사용자 등록화면으로 이동
 		if(br.hasErrors()) {
-			return "member/memberRegist";
+			return "tiles/member/memberRegistContent";
 		}
 		
 //		 파일업로드
@@ -85,18 +85,19 @@ public class MemberController {
 		return "redirect:/member/list";
 	}
 	
+	//회원상세조회
 	@RequestMapping(path="select")
 	public String select(String userid, Model model) {
 		MemberVo memberVo = memberService.getMember(userid);
 		model.addAttribute("memberVo", memberVo);
-		return "/member/memberSelect";
+		return "tiles/member/memberSelectContent";
 	}
 	
 	@RequestMapping(path="updateView")
 	public String updateView(String userid, Model model) {
 		MemberVo memberVo = memberService.getMember(userid);
 		model.addAttribute("memberVo", memberVo);
-		return "/member/memberUpdate";
+		return "tiles/member/memberUpdateContent";
 	}
 	
 	@RequestMapping(path="update")
@@ -112,40 +113,8 @@ public class MemberController {
 			memberVo.setFilename(filePath);
 			memberVo.setRealfilename(memberVo.getFile().getOriginalFilename());
 		}
-//		logger.debug("수정memberVo : {}", memberVo);
 		String userid=URLEncoder.encode(memberVo.getUserid(),"utf-8");
 		memberService.updateMember(memberVo);
 		return "redirect:/member/select?userid="+userid;
 	}
-	
-//	@RequestMapping(path="profileImg")
-//	public void profileImg(String userid, HttpServletResponse response) throws IOException {
-//		response.setContentType("image/png");
-//		MemberVo memberVo = memberService.getMember(userid);
-//		FileInputStream fis = new FileInputStream(memberVo.getFilename());
-//		ServletOutputStream sos = response.getOutputStream();
-//		byte[] buffer = new byte[512];
-//		while(fis.read(buffer)!= -1) {
-//			sos.write(buffer);
-//		}
-//		fis.close();
-//		sos.flush();
-//		sos.close();
-//	}
-	
-//	@RequestMapping(path="filedown")
-//	public void fileDown(String userid, HttpServletResponse response) throws IOException {
-//		MemberVo memberVo = memberService.getMember(userid);
-//		FileInputStream fis = new FileInputStream(memberVo.getFilename());
-//		response.setHeader("Content-Disposition", "attachment; filename=\""+memberVo.getRealfilename()+"\"");
-//		response.setContentType("application/octet-stream");
-//		ServletOutputStream sos = response.getOutputStream();
-//		byte[] buffer = new byte[512];
-//		while(fis.read(buffer)!=-1) {
-//			sos.write(buffer);
-//		}
-//		fis.close();
-//		sos.flush();
-//		sos.close();
-//	}
 }

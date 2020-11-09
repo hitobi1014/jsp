@@ -4,5 +4,4 @@
 	<li class="active"><a href="#">Main <span class="sr-only">(current)</span></a></li>
 	<li class="active"><a href="${pageContext.request.contextPath}/member/list">사용자</a></li>
 	<li class="active"><a href="<%=request.getContextPath()%>/getAllJobs">jobs</a></li>
-	
 </ul>

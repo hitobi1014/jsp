@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -81,13 +82,16 @@ public class LoginController {
 	//Model : view 객체에서 응답을 생성할 때 참조할 데이터를 담는 객체
 	//			jsp/servlet기반의 request역할을 담당
 	@RequestMapping(path="/process",params = {"userid"})
-	public String process(String userid, String pass, MemberVo memberVo, HttpSession session, Model model, 
+	public String process(String userid, String pass, MemberVo memberVo, HttpSession session, Model model,
+			@RequestBody String body,
 			@RequestParam(name = "email",required = false, defaultValue = "brown@line") String user_id) {
 		logger.debug("LoginController.process() {} / {} {}",userid, pass, memberVo);
 //		MemberServiceI memberService = new MemberService();
 		MemberVo mvo = memberService.getMember(userid);
 		logger.debug("mvo출력 : {} ",mvo);
 		logger.debug("user_id 값 : {}",user_id);
+		
+		logger.debug("body : {}",body);
 		
 		//db에서 조회한 사용자 정보가 존재하면 => main.jsp로 이동
 		//db에서 조회한 사용자 정보가 존재하지 않으면 => login.jsp

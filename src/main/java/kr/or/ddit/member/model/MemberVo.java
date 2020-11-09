@@ -2,9 +2,12 @@ package kr.or.ddit.member.model;
 
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 
+@XmlRootElement(name = "memberVo")
 public class MemberVo {
 	private String userid;
 	private String pass;
