@@ -39,6 +39,11 @@ public class MemberVo {
 		this.file = file;
 	}
 
+	public MemberVo(String userid, String usernm) {
+		this.userid = userid;
+		this.usernm = usernm;
+	}
+
 	public MultipartFile getFile() {
 		return file;
 	}

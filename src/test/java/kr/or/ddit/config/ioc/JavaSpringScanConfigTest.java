@@ -14,7 +14,7 @@ import kr.or.ddit.board.repository.BoardRepositoryI;
 import kr.or.ddit.board.service.BoardServiceI;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {JavaSpringScanConfig.class})
+@ContextConfiguration(classes = {JavaSpringConfig.class})
 public class JavaSpringScanConfigTest {
 
 	@Resource(name="boardRepository")
