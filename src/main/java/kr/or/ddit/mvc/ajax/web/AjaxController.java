@@ -25,7 +25,7 @@ public class AjaxController {
 	@ResponseBody
 	@RequestMapping(path="/ajax/json" ,
 					consumes= {"application/json"},
-					produces = {"application/xml","application/json"})
+					produces = {"application/json","application/xml"})
 	public MemberVo json(@RequestBody MemberVo memberVo) {
 		logger.debug("body: {}",memberVo);
 		memberVo.setAlias("곰");

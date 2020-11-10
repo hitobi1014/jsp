@@ -51,6 +51,35 @@ public class MemberController {
 		return "tiles/member/memberListContent";
 	}
 	
+	@RequestMapping("/listAjaxPage")
+	public String listAjaxPage() {
+		
+		return "tiles/member/listAjaxPage";
+	}
+	
+	//페이지 요청(/list와 다르게 page, pageSize 파라미터가 반드시 존재한다는 가정으로 작성)
+	@RequestMapping("/listAjax")
+	public String listAjax(PageVo pageVo , Model model) {
+		logger.debug("pageVo : {}",pageVo);
+		Map<String, Object> map = memberService.selectAllMemberPage(pageVo);
+		model.addAttribute("memberList", map.get("memberList"));
+		model.addAttribute("pages", map.get("pages"));
+		
+		return "jsonView";
+	}
+	
+	//페이지 요청(/list와 다르게 page, pageSize 파라미터가 반드시 존재한다는 가정으로 작성)
+	@RequestMapping("/listAjaxHTML")
+	public String listAjaxHTML(PageVo pageVo , Model model) {
+		logger.debug("pageVo : {}",pageVo);
+		Map<String, Object> map = memberService.selectAllMemberPage(pageVo);
+		model.addAttribute("memberList", map.get("memberList"));
+		model.addAttribute("pages", map.get("pages"));
+		
+		// 응답을 html => jsp로 생성
+		return "member/listAjaxHTML";
+	}
+	
 	@RequestMapping(path="registView")
 	public String registView(){
 		return "tiles/member/memberRegistContent";
@@ -93,8 +122,22 @@ public class MemberController {
 		return "tiles/member/memberSelectContent";
 	}
 	
+	//ajax 회원상세조회
+	@RequestMapping(path="selectAjaxPage")
+	public String selectAjaxPage() {
+		return "tiles/member/memberSelectAjax";
+	}
+	
+//	//ajax 회원상세조회
+	@RequestMapping(path="selectAjax")
+	public String selectAjax(String userid, Model model) {
+		MemberVo memberVo = memberService.getMember(userid);
+		model.addAttribute("memberVo", memberVo);
+		return "json/view";
+	}
+	
 	@RequestMapping(path="updateView")
-	public String updateView(String userid, Model model) {
+	public String updateView(String userid, Model model ) {
 		MemberVo memberVo = memberService.getMember(userid);
 		model.addAttribute("memberVo", memberVo);
 		return "tiles/member/memberUpdateContent";

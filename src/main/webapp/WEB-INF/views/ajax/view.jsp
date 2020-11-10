@@ -26,7 +26,7 @@ $(document).ready(function(){
 		
 		$.ajax({url : "/ajax/json",
 				data : JSON.stringify({userid : $("#userid").val(), usernm : $("#usernm").val()}),
-				contentType : "application/json; charset=utf-8",
+				contentType : "application/json; charset=utf-8;",
 				method : "post",
 				dataType : $("#dataType").val(), // 서버로부터 받기 희망하는 데이터 타입 
 				success : function(data){
