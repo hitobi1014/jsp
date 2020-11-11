@@ -25,14 +25,17 @@ $(document).ready(function(){
 });
 
 function memberAjax(user){
-	console.log("값확인"+user);
+// 	console.log("값확인"+user);
 	$.ajax({url : "/member/selectAjax",
 			data : {userid : user},
 			success : function(data){
 				var member = data.memberVo;
-				$("#userid").val(member.userid);
-				$("#usernm").val(member.usernm);
-				$("#alias").val(member.alias);
+				$("#userid").html(member.userid);
+				$("#usernm").html(member.usernm);
+				$("#alias").html(member.alias);
+				$("#addr1").html(member.addr1);
+				$("#addr2").html(member.addr2);
+				$("#zipcode").html(member.zipcode);
 			}
 	})
 }
@@ -61,47 +64,47 @@ function memberAjax(user){
 				<div class="form-group">
 					<label for="userNm" class="col-sm-2 control-label">사용자 아이디</label>
 					<div class="col-sm-10">
-						<label class="control-label"><input type="hidden" value="${memberVo.userid}" name="userid" id="userid"/></label>
+						<label class="control-label" id="userid"></label>
 					</div>
 				</div>
 
 				<div class="form-group">
 					<label for="userNm" class="col-sm-2 control-label">사용자 이름</label>
 					<div class="col-sm-10">
-						<label class="control-label"><input type="hidden" value="${memberVo.usernm}" name="usernm" id="usernm"/></label>
+						<label class="control-label" id="usernm"></label>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="userNm" class="col-sm-2 control-label">별명</label>
 					<div class="col-sm-10">
-						<label class="control-label"><input type="hidden" value="${memberVo.alias}" name="alias" id="alias"/></label>
+						<label class="control-label" id="alias"></label>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="pass" class="col-sm-2 control-label">Password</label>
 					<div class="col-sm-10">
-						<label class="control-label"><input type="hidden" value="${memberVo.pass}" name="pass"/>*********</label>
+						<label class="control-label"><input type="hidden"  name="pass"/>*********</label>
 					</div>
 				</div>
 				
 				<div class="form-group">
 					<label for="addr1" class="col-sm-2 control-label">주소</label>
 					<div class="col-sm-10">
-						<label class="control-label"><input type="hidden" value="${memberVo.addr1}" name="addr1"/>${memberVo.addr1}</label>
+						<label class="control-label" id="addr1"></label>
 					</div>
 				</div>
 				
 				<div class="form-group">
 					<label for="addr2" class="col-sm-2 control-label">상세주소</label>
 					<div class="col-sm-10">
-						<label class="control-label"><input type="hidden" value="${memberVo.addr2}" name="addr2"/>${memberVo.addr2 }</label>
+						<label class="control-label" id="addr2"></label>
 					</div>
 				</div>
 				
 				<div class="form-group">
 					<label for="zipcode" class="col-sm-2 control-label">우편번호</label>
 					<div class="col-sm-10">
-						<label class="control-label"><input type="hidden" value="${memberVo.zipcode}" name="zipcode"/>${memberVo.zipcode }</label>
+						<label class="control-label" id="zipcode"></label>
 					</div>
 				</div>
 				

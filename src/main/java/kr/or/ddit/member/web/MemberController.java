@@ -133,7 +133,7 @@ public class MemberController {
 	public String selectAjax(String userid, Model model) {
 		MemberVo memberVo = memberService.getMember(userid);
 		model.addAttribute("memberVo", memberVo);
-		return "json/view";
+		return "jsonView";
 	}
 	
 	@RequestMapping(path="updateView")

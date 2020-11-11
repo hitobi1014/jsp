@@ -4,7 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import kr.or.ddit.member.db.MybatisUtil;
@@ -14,19 +17,18 @@ import kr.or.ddit.member.model.PageVo;
 @Repository("memberDao")
 public class Memberdao implements MemberDaoI {
 
+	@Resource(name="sqlSessionTemplate")
+	private SqlSessionTemplate sqlSession;
+	
 	@Override
 	public MemberVo getMember(String userid) {
-		SqlSession sqlSession = MybatisUtil.getSqlSession();
 		MemberVo mvo = sqlSession.selectOne("member.getMember",userid);
-		sqlSession.close();
 		return mvo;
 	}
 
 	@Override
 	public List<MemberVo> selectAllMember() {
-		SqlSession sqlSession = MybatisUtil.getSqlSession();
 		List<MemberVo> memberList = sqlSession.selectList("member.selectAllMember");
-		sqlSession.close();
 		return memberList;
 	}
 
@@ -42,50 +44,32 @@ public class Memberdao implements MemberDaoI {
 
 	@Override
 	public int insertMember(MemberVo memberVo) {
-		SqlSession sqlSession = MybatisUtil.getSqlSession();
-		int insertCnt = 0;
-		try {
-			insertCnt = sqlSession.insert("member.insertMember",memberVo);
-		} catch (Exception e) {
-		}
-		if(insertCnt ==1 ) {
-			sqlSession.commit();
-		}
-		else {
-			sqlSession.rollback();
-		}
-		sqlSession.close();
-		
-		return insertCnt;
+		return sqlSession.insert("member.insertMember",memberVo);
 	}
 
 	@Override
 	public int deleteMember(String userid) {
-		SqlSession sqlSession = MybatisUtil.getSqlSession();
 		int deleteCnt = sqlSession.delete("member.deleteMember",userid);
 		
 		if(deleteCnt ==1) {
-			sqlSession.commit();
+//			sqlSession.commit();
 		}
 		else {
-			sqlSession.rollback();
+//			sqlSession.rollback();
 		}
-		sqlSession.close();
 		return deleteCnt;
 	}
 
 	@Override
 	public int updateMember(MemberVo memberVo) {
-		SqlSession sqlSession = MybatisUtil.getSqlSession();
 		int updateCnt = sqlSession.update("member.updateMember",memberVo);
 		
 		if(updateCnt ==1) {
-			sqlSession.commit();
+//			sqlSession.commit();
 		}
 		else {
-			sqlSession.rollback();
+//			sqlSession.rollback();
 		}
-		sqlSession.close();
 		return updateCnt;
 	}
 
