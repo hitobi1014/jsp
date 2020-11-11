@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,9 @@ public class MemberService implements MemberServiceI {
 	@Resource(name="memberDao")
 	private MemberDaoI memberDao;
 	
+	@Resource(name="sqlSessionTemplate")
+	private SqlSessionTemplate sqlSession;
+	
 	@Override
 	public MemberVo getMember(String userid) {
 		return memberDao.getMember(userid);
@@ -34,18 +38,15 @@ public class MemberService implements MemberServiceI {
 
 	@Override
 	public Map<String, Object> selectAllMemberPage(PageVo pageVo) {
-		SqlSession sqlSession = MybatisUtil.getSqlSession();
-
 		Map<String, Object> map = new HashMap<String,Object>();
-		map.put("memberList", memberDao.selectAllMemberPage(sqlSession, pageVo));
+		map.put("memberList", memberDao.selectAllMemberPage(pageVo));
 
 		// 15건, 페이지 사이즈를 7로 가정했을때 3개의 페이지가 나와야한다
 		// 15/7 = 2.14... 올림을 하여 3개의 페이지가 필요
-		int totalCount = memberDao.selectMemberTotalCount(sqlSession);
+		int totalCount = memberDao.selectMemberTotalCount();
 		int pages = (int)Math.ceil((double)totalCount/pageVo.getPageSize());
 		map.put("pages", pages);
 
-		sqlSession.close();
 		return map;
 	}
 

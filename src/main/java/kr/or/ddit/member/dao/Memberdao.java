@@ -33,12 +33,12 @@ public class Memberdao implements MemberDaoI {
 	}
 
 	@Override
-	public List<MemberVo> selectAllMemberPage(SqlSession sqlSession, PageVo pageVo) {
+	public List<MemberVo> selectAllMemberPage(PageVo pageVo) {
 		return sqlSession.selectList("member.selectAllMemberPage", pageVo);
 	}
 
 	@Override
-	public int selectMemberTotalCount(SqlSession sqlSession) {
+	public int selectMemberTotalCount() {
 		return sqlSession.selectOne("member.selectMemberTotalCount");
 	}
 

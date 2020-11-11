@@ -21,8 +21,7 @@ public class MemberControllerTest extends WebTestConfig{
 				.andExpect(status().isOk())
 				.andReturn();
 		ModelAndView mav = result.getModelAndView();
-		assertEquals("/member/memberList", mav.getViewName());
-				
+		assertEquals("tiles/member/memberListContent", mav.getViewName());
 	}
 	
 	@Test
@@ -31,7 +30,7 @@ public class MemberControllerTest extends WebTestConfig{
 				.andExpect(status().isOk())
 				.andReturn();
 		ModelAndView mav = result.getModelAndView();
-		assertEquals("/member/memberRegist", mav.getViewName());
+		assertEquals("tiles/member/memberRegistContent", mav.getViewName());
 	}
 	
 	@Test
@@ -43,7 +42,7 @@ public class MemberControllerTest extends WebTestConfig{
 				.param("alias", "fdczxbzxbc")
 				.param("addr1", "dasagczxbb")
 				.param("addr2", "1421235235")
-				.param("zipcode", "12412421"))
+				.param("zipcode", "55555"))
 				.andExpect(status().is3xxRedirection())
 				.andDo(print())
 				.andReturn();
@@ -57,7 +56,7 @@ public class MemberControllerTest extends WebTestConfig{
 				.andExpect(status().isOk())
 				.andReturn();
 		ModelAndView mav = result.getModelAndView();
-		assertEquals("/member/memberSelect", mav.getViewName());
+		assertEquals("tiles/member/memberSelectContent", mav.getViewName());
 	}
 	
 	@Test
@@ -66,7 +65,7 @@ public class MemberControllerTest extends WebTestConfig{
 				.andExpect(status().isOk())
 				.andReturn();
 		ModelAndView mav = result.getModelAndView();
-		assertEquals("/member/memberUpdate", mav.getViewName());
+		assertEquals("tiles/member/memberUpdateContent", mav.getViewName());
 	}
 	
 	@Test
@@ -74,7 +73,14 @@ public class MemberControllerTest extends WebTestConfig{
 		String userid="brown";
 		MvcResult result = mockMvc.perform(post("/member/update")
 				.param("userid", userid)
-				.param("pass", "adsgasdg"))
+				.param("usernm", "곰새")
+				.param("pass", "adsgasdg")
+				.param("alias", "곰곰")
+				.param("addr1", "123")
+				.param("addr2", "345")
+				.param("zipcode", "12524")
+				.param("filename", "asdf")
+				.param("realfilename", "zcvc"))
 				.andExpect(status().is3xxRedirection())
 				.andReturn();
 		ModelAndView mav = result.getModelAndView();

@@ -13,6 +13,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -36,7 +37,7 @@ public class LoginControllerTest extends WebTestConfig {
 	//로그인 요청 테스트(정상적인 경우)
 	@Test
 	public void processSuccessTest() throws Exception {
-		mockMvc.perform(post("/login/process")
+		mockMvc.perform(post("/login/process").contentType(MediaType.APPLICATION_FORM_URLENCODED)
 					.param("userid", "brown")
 					.param("pass", "brownPass"))
 				.andExpect(status().is(200))
@@ -48,7 +49,7 @@ public class LoginControllerTest extends WebTestConfig {
 	@Test
 	public void processFailTest() throws Exception {
 		// 따로 테스트 가능
-		MvcResult result = mockMvc.perform(post("/login/process")
+		MvcResult result = mockMvc.perform(post("/login/process").contentType(MediaType.APPLICATION_FORM_URLENCODED)
 					.param("userid", "brwon")
 					.param("pass", "brownPassFail")).andReturn();
 		ModelAndView mav = result.getModelAndView();

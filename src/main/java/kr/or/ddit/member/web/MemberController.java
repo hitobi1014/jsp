@@ -110,8 +110,14 @@ public class MemberController {
 		}
 		logger.debug("memberVo : {}", memberVo);
 		
-		memberService.insertMember(memberVo);
-		return "redirect:/member/list";
+		int insertcnt =0;
+		try {
+			insertcnt = memberService.insertMember(memberVo);
+			if(insertcnt == 1) {
+				return "redirect:/member/list";
+			}
+		} catch (Exception e) { }
+		return "tiles/member/memberRegistContent";
 	}
 	
 	//회원상세조회

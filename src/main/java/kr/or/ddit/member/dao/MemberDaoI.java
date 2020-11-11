@@ -12,9 +12,9 @@ public interface MemberDaoI {
 	
 	List<MemberVo> selectAllMember();
 	
-	List<MemberVo> selectAllMemberPage(SqlSession sqlSession, PageVo pageVo);
+	List<MemberVo> selectAllMemberPage(PageVo pageVo);
 	
-	int selectMemberTotalCount(SqlSession sqlSession);
+	int selectMemberTotalCount();
 	
 	int insertMember(MemberVo memberVo);
 	

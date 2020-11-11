@@ -1,10 +1,16 @@
 package kr.or.ddit;
 
+import javax.annotation.Resource;
+import javax.sql.DataSource;
+
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.jdbc.datasource.init.DatabasePopulatorUtils;
+import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -14,7 +20,9 @@ import org.springframework.web.context.WebApplicationContext;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:kr/or/ddit/config/spring/root-context.xml",
-								"classpath:kr/or/ddit/config/spring/application-context.xml"})
+								"classpath:kr/or/ddit/config/spring/application-context.xml",
+								"classpath:kr/or/ddit/config/spring/dataSource-context_dev.xml",
+								"classpath:kr/or/ddit/config/spring/transaction-context.xml"})
 @WebAppConfiguration	//스프링 컨테이너를 웹기반에서 동작하는 컨테이너로 생성하는 옵션 => @Controller, @RequestMapping을 썻기때문에
 public class WebTestConfig {
 	
@@ -32,12 +40,21 @@ public class WebTestConfig {
 	
 	@Autowired
 	protected WebApplicationContext context;
+	
 	protected MockMvc mockMvc; 	//dispatcher servlet 역할을 하는 객체
+	
+	@Resource(name="dataSource")
+	private DataSource dataSource;
 	
 	// Before(setup) => Test => After(tearDown) <- 많이 쓰는 함수명
 	@Before
 	public void setup()	{
 		mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
+		
+		ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
+		populator.addScripts(new ClassPathResource("/kr/or/ddit/config/db/initData.sql"));
+		populator.setContinueOnError(false);
+		DatabasePopulatorUtils.execute(populator, dataSource);
 	}
 	
 	//get(),post() : get/post 요청
