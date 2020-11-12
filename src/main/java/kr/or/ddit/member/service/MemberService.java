@@ -11,12 +11,14 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.ddit.member.dao.MemberDaoI;
 import kr.or.ddit.member.db.MybatisUtil;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.model.PageVo;
 
+@Transactional
 @Service("memberService")
 public class MemberService implements MemberServiceI {
 	private static final Logger logger = LoggerFactory.getLogger(MemberService.class);
